@@ -22,6 +22,15 @@
   d3.json('https://s1.ssl.qhres.com/static/6c6d50baf39026d5.json', (err, data) => {
     if(err) throw new Error(err);
 
+    function china(data) {
+        if (data.properties.name === "台湾省") {
+            return false
+        }
+        return true
+    }
+
+    data.features = data.features.filter(china);
+
     layer.selectAll('path')
       .data(data.features)
       .enter()
